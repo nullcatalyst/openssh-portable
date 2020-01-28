@@ -166,7 +166,7 @@ ConEnterRawMode()
 	}
 
 	dwAttributes = stdout_dwSavedAttributes;
-	dwAttributes |= (DWORD)ENABLE_VIRTUAL_TERMINAL_PROCESSING | DISABLE_NEWLINE_AUTO_RETURN;
+	dwAttributes |= (DWORD)ENABLE_VIRTUAL_TERMINAL_PROCESSING;
 
 	char *envValue = NULL;
 	size_t len = 0;	
