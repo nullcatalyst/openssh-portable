@@ -198,17 +198,22 @@ ConEnterRawMode()
 		debug("console doesn't support the ansi parsing");
 	} else {
 		debug("ENABLE_VIRTUAL_TERMINAL_PROCESSING is supported. Console supports the ansi parsing");
-		console_out_cp_saved = GetConsoleOutputCP();
-		console_in_cp_saved = GetConsoleCP();
-		if (SetConsoleOutputCP(CP_UTF8))
-			debug3("Successfully set console output code page from:%d to %d", console_out_cp_saved, CP_UTF8);
-		else
-			error("Failed to set console output code page from:%d to %d error:%d", console_out_cp_saved, CP_UTF8, GetLastError());
 
-		if (SetConsoleCP(CP_UTF8))
-			debug3("Successfully set console input code page from:%d to %d", console_in_cp_saved, CP_UTF8);
-		else
-			error("Failed to set console input code page from:%d to %d error:%d", console_in_cp_saved, CP_UTF8, GetLastError());
+		console_out_cp_saved = GetConsoleOutputCP();
+		if (console_out_cp_saved) {
+			if (SetConsoleOutputCP(CP_UTF8))
+				debug3("Successfully set console output code page from:%d to %d", console_out_cp_saved, CP_UTF8);
+			else
+				error("Failed to set console output code page from:%d to %d error:%d", console_out_cp_saved, CP_UTF8, GetLastError());
+		}
+
+		console_in_cp_saved = GetConsoleCP();
+		if (console_in_cp_saved) {
+			if (SetConsoleCP(CP_UTF8))
+				debug3("Successfully set console input code page from:%d to %d", console_in_cp_saved, CP_UTF8);
+			else
+				error("Failed to set console input code page from:%d to %d error:%d", console_in_cp_saved, CP_UTF8, GetLastError());
+		}
 
 		if (track_view_port) {
 			ConSaveViewRect();
