@@ -65,7 +65,6 @@ snmprintf(char *buf, size_t len, int *written, const char *fmt, ...)
 void
 msetlocale(void)
 {
-	// allow console output of unicode characters
-	SetConsoleOutputCP(CP_UTF8);
+	// Do nothing
+	// The code page is changed to UTF-8 in ConEnterRawMode()
 }
-
